@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue3-todo</title>
+    <style>
+        .done {
+            /* 中间有条线  并呈现灰色 */
+            text-decoration: line-through;
+            color: #eee;
+        }
+
+        li {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body><!-- //绑定事件add//v-是指令 -->
+    <div id="app">
+            <input 
+            type="text" 
+            class="input"
+            v-model="inputValue"
+            @keyup.enter="add"
+        >
+        <p>列表：</p>
+        <!-- //循环 -->
+        <ul>
+            <li
+                v-for="(item,index) in list"
+                @click="item.done=!item.done"
+                :class="{
+                    done:item.done,
+                }"
+                @contextmenu="remove(index,$event)"
+            >
+                {{item.text}}
+            </li>
+        </ul>
+    </div>
+
+    <!-- //bootcdn -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.0.2/vue.global.js  "></script>
+    <script>
+        const ref=Vue.ref;
+
+        //声明一个对象 配置的形式  组件
+        const Todo ={
+            setup() {
+                const list=ref([]);
+                const inputValue=ref('');
+                
+                const add=()=>{//箭头函数
+                    list.value.push({
+                        text:inputValue.value,
+                        done:false,
+                    });
+
+                    inputValue.value='';
+                };
+
+                const remove=(index,e)=>{
+                    e.preventDefault();//取消默认方式 右键出现选项框
+                    list.value.splice(index,1);
+                };
+
+                return{
+                    add,
+                    remove,
+
+                    list,
+                    inputValue,
+                };
+            },
+        };
+
+        Vue.createApp(Todo).mount('#app');//利用根组件创造一个应用
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery Todo</title>
+    <style>
+        .done {
+            /* 中间有条线  并呈现灰色 */
+            text-decoration: line-through;
+            color: #eee;
+        }
+
+        li {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" class="input">
+
+    <p>列表：</p>
+
+    <ul></ul>
+
+    <!-- //bootcdn -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js "></script>
+    <script>
+        var $input = $('.input');
+        var $ul = $('ul');
+
+        // 绑定事件 键盘弹起
+        $input.keyup(function (e) {
+            var keyCode = e.keyCode;
+
+            if (keyCode !== 13) return;
+
+            $ul.append('<li>' + $input.val() + '</li>');
+        });
+        //左键划掉
+        $ul.on('click', 'li', function () {
+            $(this).toggleClass('done');
+        });
+        // 右键事件 contextmenu右键菜单
+        $ul.on('contextmenu', 'li', function (e) {
+            e.preventDefault();
+            $(this).remove();
+        });
+    </script>
+</body>
+
+</html>
