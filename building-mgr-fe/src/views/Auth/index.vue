@@ -54,6 +54,7 @@
             <a-input
               size="large"
               placeholder="账户"
+              v-model:value="regForm.account"
             >
               <template
                 v-slot:prefix
@@ -67,10 +68,13 @@
             <a-input
               size="large"
               placeholder="密码"
+              v-model:value="regForm.password"
             >
+          
               <template
                 v-slot:prefix
               >
+              
                 <LockOutlined />
               </template>
             </a-input>
