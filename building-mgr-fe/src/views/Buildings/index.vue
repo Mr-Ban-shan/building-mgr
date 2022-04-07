@@ -4,14 +4,14 @@
       :title="wdadwad"
     >
       <div v-if="!simple">
-        <h2>hh</h2>
+        <h2>建材列表</h2>
 
         <a-divider />
 
         <space-between>
           <div class="search">
             <a-input-search
-              :placeholder="`根据搜索`"
+              :placeholder="`根据建材名搜索`"
               enter-button
               v-model:value="keyword"
               @search="onSearch"
@@ -44,7 +44,7 @@
 
       <a-table
         :columns="columns"
-        :data-source="list"
+        :data-source="dataSource"
         :pagination="false"
         bordered
         :scroll="{ x: 'max-content' }"

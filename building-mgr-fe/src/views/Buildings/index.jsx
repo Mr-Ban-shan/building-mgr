@@ -1,4 +1,4 @@
-// import { defineComponent, ref, onMounted } from 'vue';
+ import { defineComponent, ref, onMounted } from 'vue';
 // import { good, goodClassify } from '@/service';
 // import { useRouter } from 'vue-router';
 // import { message, Modal, Input } from 'ant-design-vue';
@@ -9,7 +9,7 @@
 // import _ from '@/config/common';
 // import Update from './Update/index.vue';
 
-// export default defineComponent({
+ export default defineComponent({
 //   components: {
 //     AddOne,
 //     Update,
@@ -17,18 +17,26 @@
 //   props: {
 //     simple: Boolean,
 //   },
-//   setup(props) {
+   setup(props) {         
 //     const router = useRouter();
 
-//     const columns = [
-//       {
-//         title: `${_.KEYWORD}名`,
-//         dataIndex: 'name',
-//       },
-//       {
-//         title: '保质期',
-//         dataIndex: 'expirationDate',
-//       },
+     const columns = [
+       {
+        title: '名字',
+         dataIndex: 'name',
+       },
+       {
+         title: '年龄',
+         dataIndex: 'age',
+       },
+      ];
+       const dataSource = [
+         {
+           name: '小红',
+           age: 2,
+         },
+       ];
+      
 //       {
 //         title: '价格',
 //         dataIndex: 'price',
@@ -212,8 +220,9 @@
 //       }
 //     };
 
-//     return {
-//       columns,
+     return {
+       columns,
+       dataSource,
 //       show,
 //       list,
 //       formatTimestamp,
@@ -236,6 +245,6 @@
 //       simple: props.simple,
 //       onUploadChange,
 //       headers: getHeaders(),
-//     };
-//   },
-// });
+     };
+   },
+ });
