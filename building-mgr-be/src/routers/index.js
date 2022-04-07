@@ -3,5 +3,5 @@ const inviteCode = require('./invite-code/index');
 
 module.exports = (app) => {
     app.use(auth.routes());
-    // app.use(inviteCode.routes());  随即生成的
+    app.use(inviteCode.routes());  //随即生成的
 };

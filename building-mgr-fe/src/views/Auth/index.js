@@ -66,10 +66,9 @@ export default defineComponent({
         return;
       }
 
-      const res = await auth.register(
-        regForm.account,
-        regForm.password,
-        regForm.inviteCode,
+      const res = await auth.login(
+        loginForm.account,
+        loginForm.password,
       );
 
       result(res)
