@@ -1,7 +1,7 @@
 
 require('./Schemas/User'); 
 require('./Schemas/InviteCode');
-
+require('./Schemas/Building');
 
 const mongoose = require('mongoose');
 

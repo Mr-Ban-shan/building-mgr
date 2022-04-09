@@ -1,7 +1,9 @@
 const auth = require('./auth/index');
 const inviteCode = require('./invite-code/index');
+const building = require('./building');
 
 module.exports = (app) => {
     app.use(auth.routes());
     app.use(inviteCode.routes());  //随即生成的
+    app.use(building.routes());
 };

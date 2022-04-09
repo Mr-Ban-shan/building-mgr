@@ -1,57 +1,58 @@
-// import { defineComponent, reactive, watch } from 'vue';
-// import { good } from '@/service';
-// import { message } from 'ant-design-vue';
-// import { result, clone } from '@/helpers/utils';
-// import moment from 'moment';
+ import { defineComponent, reactive, watch } from 'vue';
+ import { building } from '@/service';
+ import { message } from 'ant-design-vue';
+ import { result, clone } from '@/helpers/utils';
+ import moment from 'moment';
 // import store from '@/store';
 
-// export default defineComponent({
-//   props: {
-//     show: Boolean,
-//     good: Object,
-//   },
-//   setup(props, context) {
-//     const editForm = reactive({
-//       name: '',
-//       price: 0,
-//       producedDate: '',
-//       expirationDate: 0,
-//       classify: '',
-//     });
+ export default defineComponent({
+    props: {
+        show: Boolean,
+        building: Object,
+    },
+   setup(props , context  ) {
+       const editForm = reactive({
+         name: '',
+         price: 0,
+         author: '',
+         publishDate: 0,
+         classify:'',
+       });
 
-//     const close = () => {
-//       context.emit('update:show', false);
-//     };
+     const close = () => {
+        context.emit('update:show', false);
+    };
 
-//     watch(() => props.good, (current) => {
-//       Object.assign(editForm, current);
-//       editForm.producedDate = moment(Number(editForm.producedDate));
-//     });
+    watch(() => props.building, (current) => {
+      Object.assign(editForm, current);
+      editForm.publishDate = moment(Number(editForm.publishDate));
+    });
 
-//     const submit = async () => {
-//       const res = await good.update({
-//         id: props.good._id,
-//         name: editForm.name,
-//         price: editForm.price,
-//         expirationDate: editForm.expirationDate,
-//         producedDate: editForm.producedDate.valueOf(),
-//         classify: editForm.classify,
-//       });
+    const submit = async () => {
+      const res = await building.update({
+        id: props.building._id,
+        name: editForm.name,
+        price: editForm.price,
+        author: editForm.author,
+        publishDate: editForm.publishDate.valueOf(),
+        classify: editForm.classify,
+      });
 
-//       result(res)
-//         .success(({ data, msg }) => {
-//           context.emit('update', data);
-//           message.success(msg);
-//           close();
-//         });
-//     };
+      result(res)
+        .success(({ data, msg }) => {
+          context.emit('update', data);
+          message.success(msg);
+          close();
+        });
+    };
 
-//     return {
-//       editForm,
-//       submit,
-//       props,
-//       close,
+   
+     return {
+       editForm,
+       submit,
+       props,
+       close,
 //       store: store.state,
-//     };
-//   },
-// });
+     };
+   },
+ });
