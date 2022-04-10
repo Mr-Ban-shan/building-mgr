@@ -10,12 +10,22 @@ const routes = [
   {
     path: '/',
     name: 'BasicLayout',
-    component: () => import(/* webpackChunkName: "auth" */ '../layout/BasicLayout/index.vue'),
+    component: () => import(/* webpackChunkName: "BasicLayout" */ '../layout/BasicLayout/index.vue'),
     children: [
       {
         path: '/buildings',
         name: 'Buildings',
-        component: () => import(/* webpackChunkName: "Goods" */ '../views/Buildings/index.vue'),
+        component: () => import(/* webpackChunkName: "Buildings" */ '../views/Buildings/index.vue'),
+      },
+      {
+        path: '/buildings/:id',
+        name: 'BuildingDetail',
+        component: () => import(/* webpackChunkName: "BuildingDetail" */ '../views/BuildingDetail/index.vue'),
+      },
+      {
+        path: 'user',
+        name: 'User',
+        component: () => import(/* webpackChunkName: "User" */ '../views/Users/index.vue'),
       },
     ],
   },

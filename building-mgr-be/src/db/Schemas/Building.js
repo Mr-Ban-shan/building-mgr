@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { getMeta/* , preSave */ } = require('../helpers');
+const { getMeta , preSave  } = require('../helpers');
 // const _ = require('../../config/common');
 
 const BuildingSchema = new mongoose.Schema({
@@ -20,6 +20,6 @@ const BuildingSchema = new mongoose.Schema({
   meta: getMeta(),
 });
 
-// BuildingSchema.pre('save', preSave);
+ BuildingSchema.pre('save', preSave);
 
 mongoose.model('Building', BuildingSchema);

@@ -2,6 +2,7 @@
 require('./Schemas/User'); 
 require('./Schemas/InviteCode');
 require('./Schemas/Building');
+require('./Schemas/InventoryLog');
 
 const mongoose = require('mongoose');
 

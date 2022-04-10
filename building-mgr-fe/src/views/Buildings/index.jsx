@@ -15,7 +15,6 @@ export default defineComponent({
     simple: Boolean,
   },
   setup(props){
-    const router = useRouter();
 
     const columns = [
       {
@@ -71,6 +70,7 @@ export default defineComponent({
       const curPage = ref(1);
       const isSearch = ref(false);
       const curEditBuilding=ref({});
+      const router = useRouter();
 
       // 获取商品列表
     const getList = async () => {
@@ -191,16 +191,14 @@ export default defineComponent({
       Object.assign(curEditBuilding.value, newData);
     };
 
-    const showDialog = _ => {
-      console.log('show')
+     
 
-      show.value = true
+    // 进入商品详情页
+    const toDetail = ({ record }) => {
+      router.push(`/buildings/${record._id}`);
+    };
 
-      console.log('??? = ', show)
-    }
-
-      return {
-        showDialog,
+      return { 
         columns,
         show,
         list,
@@ -219,6 +217,7 @@ export default defineComponent({
         curEditBuilding,
         updateCurBuilding,
         getList,
+        toDetail,
       };
   },
 });

@@ -11,10 +11,12 @@ const BUILDING_CONST = {
 };
 
  const Building = mongoose.model('Building');
-// const InventoryLog = mongoose.model('InventoryLog');
+ const InventoryLog = mongoose.model('InventoryLog');
 // const GoodClassify = mongoose.model('GoodClassify');
 
-const findOne = async (id) => {
+
+
+const findBuildingOne = async (id) => {
   const one = await Building.findOne({
     _id: id,
   }).exec();
@@ -51,9 +53,9 @@ const findOne = async (id) => {
 
    const list = await Building
      .find(query)
-//     .sort({
-//       _id: -1,
-//     })
+    .sort({
+      _id: -1,
+    })
      .skip((page - 1) * size)
      .limit(size)
      .exec();
@@ -100,11 +102,9 @@ router.delete('/:id', async (ctx) => {
 
   num = Number(num);
 
-  const building = await Building.findOne({
-    _id: id,
-  }).exec();
+  const one = await findBuildingOne(id);
 
-  if (!building) {
+  if (!one) {
     ctx.body = {
       code: 0,
       msg: '没有找到书籍',
@@ -122,9 +122,9 @@ router.delete('/:id', async (ctx) => {
     num = -Math.abs(num);
   }
 
-  building.count = building.count + num;
+  one.count = one.count + num;
 
-  if (building.count < 0) {
+  if (one.count < 0) {
     ctx.body = {
       code: 0,
       msg: '剩下的量不足以出库',
@@ -132,14 +132,14 @@ router.delete('/:id', async (ctx) => {
     return;
   }
 
-  const res = await building.save();
+  const res = await one.save();
 
-//   const log = new InventoryLog({
-//     num: Math.abs(num),
-//     type,
-//   });
+  const log = new InventoryLog({
+    num: Math.abs(num),
+    type,
+  });
 
-//   log.save();
+  log.save();
 
   ctx.body = {
     data: res,
@@ -154,9 +154,7 @@ router.delete('/:id', async (ctx) => {
     ...others
   } = ctx.request.body;
 
-   const one = await Building.findOne({
-     _id: id,
-   }).exec();
+  const one = await findBuildingOne(id);
 
   // 没有找到书
   if (!one) {
@@ -186,29 +184,29 @@ router.delete('/:id', async (ctx) => {
   };
  });
 
-// router.get('/detail/:id', async (ctx) => {
-//   const {
-//     id,
-//   } = ctx.params;
+router.get('/detail/:id', async (ctx) => {
+  const {
+    id,
+  } = ctx.params;
 
-//   const one = await findGoodOne(id);
+  const one = await findBuildingOne(id);
 
-//   // 没有找到书
-//   if (!one) {
-//     ctx.body = {
-//       msg: `没有找到${_.KEYWORD}`,
-//       code: 0,
-//     };
+  // 没有找到书
+  if (!one) {
+    ctx.body = {
+      msg: '没有找到书籍',
+      code: 0,
+    };
 
-//     return;
-//   }
+    return;
+  }
 
-//   ctx.body = {
-//     msg: '查询成功',
-//     data: one,
-//     code: 1,
-//   };
-// });
+  ctx.body = {
+    msg: '查询成功',
+    data: one,
+    code: 1,
+  };
+});
 
 // router.post('/addMany', async (ctx) => {
 //   const {
