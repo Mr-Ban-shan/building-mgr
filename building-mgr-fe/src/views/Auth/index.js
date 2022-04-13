@@ -3,6 +3,10 @@ import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons-vue'
 import { auth } from '@/service';
 import { result } from '@/helpers/utils';
 import { message, Modal, Input } from 'ant-design-vue';
+import store from '@/store';
+import { getCharacterInfoById } from '@/helpers/character';
+import { useRouter } from 'vue-router';
+import { setToken } from '@/helpers/token';
 
 
 export default defineComponent({
@@ -14,6 +18,8 @@ export default defineComponent({
       },
       
     setup(){
+      const router = useRouter();
+
       // 注册用的表单数据
       const regForm = reactive({
         account: '',
@@ -72,8 +78,14 @@ export default defineComponent({
       );
 
       result(res)
-        .success((data) => {
-          message.success(data.msg);
+        .success( async  ({msg, data: { user , token  } }) => {
+          message.success(msg);
+          setToken(token);
+
+          store.commit('setUserInfo', user);
+          store.commit('setUserCharacter', getCharacterInfoById(user.character));
+
+          router.replace('/buildings');
         });
       /* auth.login(loginForm.account,loginForm.password); */
       };

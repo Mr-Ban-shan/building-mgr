@@ -3,8 +3,9 @@ import { user } from '@/service';
 import { result, formatTimestamp } from '@/helpers/utils';
 import { message } from 'ant-design-vue';
 import AddOne from './AddOne/index.vue';
-
-
+import { EditOutlined } from '@ant-design/icons-vue';
+import { getCharacterInfoById } from '@/helpers/character';
+import store from '@/store';
 
 
 
@@ -36,7 +37,7 @@ const columns = [
 export default defineComponent({
   components: {
     AddOne,
-    /* EditOutlined, */
+    EditOutlined, 
   },
 
   setup() {
@@ -46,6 +47,7 @@ export default defineComponent({
     const showAddModal = ref(false);
     const keyword = ref('');
     const isSearch = ref(false);
+    const showEditCharacterModal = ref(false);
 
     const getUser = async () => {
       const res = await user.list(curPage.value, 10 , keyword.value );
@@ -97,6 +99,29 @@ export default defineComponent({
       getUser();
     };
 
+    const editForm = reactive({
+      character: '',
+      current: {},
+    });
+
+    const onEdit = (record) => {
+      editForm.current = record;
+      editForm.character = record.character;
+
+      showEditCharacterModal.value = true;
+    };
+    
+    const updateCharacter = async () => {
+      const res = await user.editCharacter(editForm.character, editForm.current._id);
+
+      result(res)
+        .success(({ msg }) => {
+          message.success(msg);
+          showEditCharacterModal.value = false;
+          editForm.current.character = editForm.character;
+        });
+    }; 
+
     return {
       list,
       total,
@@ -112,6 +137,12 @@ export default defineComponent({
       keyword,
       backAll,
       onSearch,
+      showEditCharacterModal,
+      editForm,
+      getCharacterInfoById,
+      characterInfo: store.state.characterInfo,
+      onEdit,
+      updateCharacter,
       /* 
       
       
@@ -120,12 +151,11 @@ export default defineComponent({
       
       
       
-      onEdit,
-      updateCharacter,
-      getCharacterInfoById,
-      showEditCharacterModal,
-      editForm,
-      characterInfo: store.state.characterInfo,
+      
+      
+      
+      
+      
       onUploadChange,
       headers: getHeaders(), */
     };
@@ -135,12 +165,12 @@ export default defineComponent({
 /* 
 
 
-import { EditOutlined } from '@ant-design/icons-vue';
+
 
 
 import { getHeaders } from '@/helpers/request';
-import { getCharacterInfoById } from '@/helpers/character';
-import store from '@/store';
+
+
 
 
   // {
@@ -160,12 +190,7 @@ import store from '@/store';
     
     
     
-    const showEditCharacterModal = ref(false);
-
-    const editForm = reactive({
-      character: '',
-      current: {},
-    });
+    
 
     
 
@@ -178,39 +203,11 @@ import store from '@/store';
     
 
     
-    const onEdit = (record) => {
-      editForm.current = record;
-      editForm.character = record.character;
 
-      showEditCharacterModal.value = true;
-    };
+    
+    
 
-    const updateCharacter = async () => {
-      const res = await user.editCharacter(editForm.character, editForm.current._id);
-
-      result(res)
-        .success(({ msg }) => {
-          message.success(msg);
-          showEditCharacterModal.value = false;
-          editForm.current.character = editForm.character;
-        });
-    };
-
-    const onUploadChange = ({ file }) => {
-      if (file.response) {
-        result(file.response)
-          .success(async (key) => {
-            const res = await user.addMany(key);
-
-            result(res)
-              .success(({ data: { addCount } }) => {
-                message.success(`成功添加 ${addCount} 位用户`);
-
-                getUser();
-              });
-          });
-      }
-    };
+    
 
     
   },

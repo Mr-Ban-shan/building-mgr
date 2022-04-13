@@ -3,6 +3,8 @@ require('./Schemas/User');
 require('./Schemas/InviteCode');
 require('./Schemas/Building');
 require('./Schemas/InventoryLog');
+require('./Schemas/Character');
+
 
 const mongoose = require('mongoose');
 

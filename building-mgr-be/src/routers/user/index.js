@@ -5,6 +5,7 @@ const config = require('../../project.config');
 
 
 const User = mongoose.model('User');
+const Character = mongoose.model('Character');
 
 const router = new Router({
   prefix: '/user',
@@ -68,11 +69,11 @@ router.delete('/:id', async (ctx) => {
 router.post('/add', async (ctx) => {
   const {
     account,
-    password ,
-    /* character, */
+    password,
+    character,
   } = ctx.request.body;
 
-  /* const char = await Character.findOne({
+  const char = await Character.findOne({
     _id: character,
   });
 
@@ -83,12 +84,12 @@ router.post('/add', async (ctx) => {
     };
 
     return;
-  } */
+  }
 
   const user = new User({
     account,
-    password: password || '123123' ,
-    /* character, */
+    password: password || '123123',
+    character,
   });
 
   const res = await user.save()
@@ -99,54 +100,6 @@ router.post('/add', async (ctx) => {
     msg: '添加成功',
   };
 });
-
-router.post('/reset/password', async (ctx) => {
-  const {
-    id,
-  } = ctx.request.body;
-
-  const user = await User.findOne({
-    _id: id,
-  }).exec();
-
-  if (!user) {
-    ctx.body = {
-      msg: '找不到用户',
-      code: 0,
-    };
-
-    return;
-  }
-
-  user.password = config.DEFAULT_PASSWORD;
-
-  const res = await user.save();
-
-  ctx.body = {
-    msg: '修改成功',
-    data: {
-      account: res.account,
-      _id: res._id,
-    },
-    code: 1,
-  };
-});
-/* 
-
-const { verify, getToken } = require('../../helpers/token');
-const { loadExcel, getFirstSheet } = require('../../helpers/excel');
-
-// const { getBody } = require('../../helpers/utils');
-
-const Character = mongoose.model('Character');
-
-
-
-
-
-
-
-
 
 router.post('/reset/password', async (ctx) => {
   const {
@@ -222,6 +175,28 @@ router.post('/update/character', async (ctx) => {
     msg: '修改成功',
   };
 });
+
+
+/* 
+
+const { verify, getToken } = require('../../helpers/token');
+const { loadExcel, getFirstSheet } = require('../../helpers/excel');
+
+// const { getBody } = require('../../helpers/utils');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 router.get('/info', async (ctx) => {
   ctx.body = {
