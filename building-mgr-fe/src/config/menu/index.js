@@ -22,15 +22,15 @@ export default [
     onlyAdmin: true,
   
   }, 
-  /* {
+  {
     title: '杂项',
     onlyAdmin: false,
     children: [
-      {
+      /* {
         title: `${_.KEYWORD}分类管理`,
         url: '/good-classify',
         onlyAdmin: true,
-      },
+      }, */
       {
         title: '重制密码列表',
         url: '/reset/password',
@@ -43,9 +43,9 @@ export default [
       },
     ],
   },
-  {
+  /* {
     title: '个人设置',
     url: '/profile',
     onlyAdmin: false,
-  }, */
+  },  */
 ];

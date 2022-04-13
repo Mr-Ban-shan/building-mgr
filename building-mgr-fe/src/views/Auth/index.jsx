@@ -1,6 +1,6 @@
 import {defineComponent, reactive,ref} from 'vue'
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons-vue';
-import { auth } from '@/service';
+import { auth , resetPassword } from '@/service';
 import { result } from '@/helpers/utils';
 import { message, Modal, Input } from 'ant-design-vue';
 import store from '@/store';
@@ -24,7 +24,31 @@ export default defineComponent({
       const regForm = reactive({
         account: '',
         password: '',
+        inviteCode: '',
       });
+
+const forgetPassword = () => {
+      Modal.confirm({
+        title: `输入账号发起申请，管理员会审核`,
+        content: (
+          <div>
+            <Input class="__forget_password_account" />
+          </div>
+        ),
+        onOk: async () => {
+          const el = document.querySelector('.__forget_password_account');
+          let account = el.value;
+
+          const res = await resetPassword.add(account);
+
+          result(res)
+            .success(({ msg }) => {
+              message.success(msg);
+            });
+        },
+      });
+    };
+
       // 注册逻辑
       const register = async ()=>{
         if (regForm.account === '') {
@@ -98,6 +122,7 @@ export default defineComponent({
         // 登入相关数据
         login,
         loginForm,
+        forgetPassword,
       };
 
     },

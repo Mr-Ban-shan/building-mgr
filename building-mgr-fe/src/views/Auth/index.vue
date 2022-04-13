@@ -114,7 +114,7 @@
 
 
 
-<script src="./index.js"></script>
+<script src="./index.jsx"></script>
 
 <style lang="scss" scpoed>
   @import './index.scss';
