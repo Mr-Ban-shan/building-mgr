@@ -16,6 +16,7 @@
         <template #title>
           <span><MailOutlined /><span>{{ item.title }}</span></span>
         </template>
+
         <a-menu-item
           @click="to(child.url)"
           v-for="(child) in item.children"
@@ -24,6 +25,7 @@
           {{ child.title }}
         </a-menu-item>
       </a-sub-menu>
+
       <a-menu-item @click="to(item.url)" :key="item.url" v-else>
         {{ item.title }}
       </a-menu-item>

@@ -15,7 +15,10 @@ export const list = (data) => {
       'http://localhost:3000/building/list', 
       {
         params: data,
-      }
+        /* headers: {
+          Authorization: `Bearer ${getToken}`
+        }, */
+      },
   );
 };
 

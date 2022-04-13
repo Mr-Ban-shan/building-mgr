@@ -10,14 +10,12 @@ const LogSchema = new mongoose.Schema({
   request: {
     method: String,
     url: String,
-    body: String,
-    /* status: Number, */
+    status: Number, 
   },
 
-  /* startTime: Number,
+  startTime: Number,
   endTime: Number,
-
-  show: Boolean, */
+  show: Boolean, 
 
   meta: getMeta(),
 });

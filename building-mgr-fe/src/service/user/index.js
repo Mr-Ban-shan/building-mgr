@@ -40,5 +40,5 @@ export const editCharacter = (characterId, userId) => {
 };
 
 export const info = () => {
-  return axios.post('http://localhost:3000/user/info');
+  return axios.get('http://localhost:3000/user/info');
 };

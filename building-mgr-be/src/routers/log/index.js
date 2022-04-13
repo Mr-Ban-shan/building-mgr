@@ -29,21 +29,21 @@ router.get('/list', async (ctx) => {
     .limit(size)
     .exec();
 
-  /* const total = await Log.countDocuments().exec(); */
+  const total = await Log.countDocuments().exec(); 
 
   ctx.body = {
     data: {
       list,
-      /* page,
+      page,
       size,
-      total, */
+      total,
     },
     code: 1,
     msg: '获取列表成功',
   };
 });
 
-/* router.post('/delete', async (ctx) => {
+router.post('/delete', async (ctx) => {
   const {
     id,
   } = ctx.request.body;
@@ -69,6 +69,6 @@ router.get('/list', async (ctx) => {
     code: 1,
     msg: '删除成功',
   };
-}); */
+});
 
 module.exports = router;

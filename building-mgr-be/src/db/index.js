@@ -4,8 +4,12 @@ require('./Schemas/InviteCode');
 require('./Schemas/Building');
 require('./Schemas/InventoryLog');
 require('./Schemas/Character');
-
-
+require('./Schemas/Log');
+require('./Schemas/LogResponse');
+/* 
+require('./Schemas/ForgetPassword');
+require('./Schemas/GoodClassify');
+ */
 const mongoose = require('mongoose');
 
  /* const UserSchema=new mongoose.Schema({

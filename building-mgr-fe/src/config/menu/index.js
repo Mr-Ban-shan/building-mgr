@@ -9,7 +9,7 @@ export default [
   {
     title: '书籍管理',
     url: '/buildings',
-    onlyAdmin: false,
+    onlyAdmin: true,
   },
   {
     title: '用户管理',

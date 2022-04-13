@@ -21,6 +21,7 @@
           <template #createdAt="{ record }">
             {{ formatTimestamp(record.meta.createdAt) }}
           </template>
+          
           <template v-if="!simple" #action="{ record }">
             <a href="javascript:;" @click="remove(record)">删除</a>
           </template>

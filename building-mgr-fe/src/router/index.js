@@ -11,15 +11,16 @@ const routes = [
   {
     path: '/',
     name: 'BasicLayout',
+    redirect: '/auth',
     component: () => import(/* webpackChunkName: "BasicLayout" */ '../layout/BasicLayout/index.vue'),
     children: [
       {
-        path: '/buildings',
+        path: 'buildings',
         name: 'Buildings',
         component: () => import(/* webpackChunkName: "Buildings" */ '../views/Buildings/index.vue'),
       },
       {
-        path: '/buildings/:id',
+        path: 'buildings/:id',
         name: 'BuildingDetail',
         component: () => import(/* webpackChunkName: "BuildingDetail" */ '../views/BuildingDetail/index.vue'),
       },
@@ -44,17 +45,6 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
 
-  const reqArr = [];
-
-  if (!store.state.characterInfo.length) {
-    reqArr.push(store.dispatch('getCharacterInfo'));
-  }
-
-
-  if (!store.state.userInfo.account) {
-    reqArr.push(store.dispatch('getUserInfo'));
-  }
-
   /* let res = {};
 
   try {
@@ -77,24 +67,36 @@ router.beforeEach(async (to, from, next) => {
     next('/auth');
 
     return;
+  } */
+
+  if (!store.state.characterInfo.length) {
+    await store.dispatch('getCharacterInfo');
   }
 
-  
+  /* store.dispatch('getUserInfo'); */
 
-  
+  /* const reqArr = []; */
 
+  if (!store.state.userInfo.account) {
+    await store.dispatch('getUserInfo');
+  }
+
+  /* 
   if (!store.state.goodClassify.length) {
     reqArr.push(store.dispatch('getGoodClassify'));
-  }
-
-  await Promise.all(reqArr);
-
-  if (to.path === '/auth') {
-    next('/goods');
-    return;
   }*/
 
+  
 
+  
+
+  /* await Promise.all(reqArr); */
+
+  /* if (to.path === '/auth') {
+    next('/goods');
+    return;
+  } */
+   
   next(); 
 });
 
