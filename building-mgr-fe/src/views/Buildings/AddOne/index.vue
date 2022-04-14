@@ -20,19 +20,19 @@
           <a-date-picker v-model:value="addForm.publishDate" />
         </a-form-item>
         <a-form-item label="分类">
-          <a-input v-model:value="addForm.classify" />
-          <!-- <a-select
-            
+          <!-- <a-input /> -->
+          <a-select
+            v-model:value="addForm.classify" 
             style="width: 120px"
           >
             <a-select-option
-              v-for="item in store.goodClassify"
+              v-for="item in store.buildingClassify"
               :key="item._id"
               :value="item._id"
             >
               {{ item.title }}
             </a-select-option>
-          </a-select> -->
+          </a-select>
         </a-form-item>
         <a-form-item label="库存">
           <a-input v-model:value="addForm.count" />

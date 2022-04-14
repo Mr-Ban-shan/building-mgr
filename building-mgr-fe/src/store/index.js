@@ -8,9 +8,7 @@ export default createStore({
     characterInfo: [],
     userInfo: {},
     userCharacter: {},
-    /* buildingClassify: [],
-    
-     */
+    buildingClassify: [],
   },
   mutations: {
     setCharacterInfo(state, characterInfo) {
@@ -22,19 +20,19 @@ export default createStore({
     setUserCharacter(state, userCharacter) {
       state.userCharacter = userCharacter;
     }, 
-    /* setBuildingClassify(state, buildingClassify) {
+    setBuildingClassify(state, buildingClassify) {
       state.buildingClassify = buildingClassify;
-    }, */
+    }, 
   },
   actions: {
-    /* async getBuildingClassify(store) {
+    async getBuildingClassify(store) {
       const res = await buildingClassify.list();
 
       result(res)
         .success(({data}) => {
           store.commit('setBuildingClassify', data);
         });
-    }, */
+    }, 
     async getCharacterInfo(store) {
       const res = await character.list();
 

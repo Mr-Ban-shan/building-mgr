@@ -44,6 +44,21 @@ const routes = [
         name: 'InviteCode',
         component: () => import(/* webpackChunkName: "InviteCode" */ '../views/InviteCode/index.vue'),
       },
+      {
+        path: 'building-classify',
+        name: 'BuildingClassify',
+        component: () => import(/* webpackChunkName: "BuildingClassify" */ '../views/BuildingClassify/index.vue'),
+      },
+      {
+        path: 'profile',
+        name: 'Profile',
+        component: () => import(/* webpackChunkName: "Profile" */ '../views/Profile/index.vue'),
+      },
+      {
+        path: 'dashboard',
+        name: 'Dashboard',
+        component: () => import(/* webpackChunkName: "Dashboard" */ '../views/Dashboard/index.vue'),
+      },
     ],
   },
 ];
@@ -85,22 +100,20 @@ router.beforeEach(async (to, from, next) => {
 
   /* store.dispatch('getUserInfo'); */
 
-  /* const reqArr = []; */
+  const reqArr = []; 
 
   if (!store.state.userInfo.account) {
-    await store.dispatch('getUserInfo');
+    reqArr.push(store.dispatch('getUserInfo'));
   }
 
-  /* 
-  if (!store.state.goodClassify.length) {
-    reqArr.push(store.dispatch('getGoodClassify'));
-  }*/
-
+  if (!store.state.buildingClassify.length) {
+    reqArr.push(store.dispatch('getBuildingClassify'));
+  }
   
 
   
 
-  /* await Promise.all(reqArr); */
+  await Promise.all(reqArr);
 
   /* if (to.path === '/auth') {
     next('/goods');

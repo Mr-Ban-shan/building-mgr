@@ -6,10 +6,13 @@ const user = require('./user');
 const character = require('./character');
 const log = require('./log');
 const forgetPassword = require('./forget-password');
-/* 
-const goodClassify = require('./good-classify');
+const buildingClassify = require('./building-classify');
 const profile = require('./profile');
 const dashboard = require('./dashboard');
+/* 
+
+
+
 const upload = require('./upload'); */
 
 module.exports = (app) => {
@@ -21,9 +24,12 @@ module.exports = (app) => {
     app.use(character.routes());
     app.use(log.routes());
     app.use(forgetPassword.routes());
-    /* 
-    app.use(goodClassify.routes());
+    app.use(buildingClassify.routes());
     app.use(profile.routes());
     app.use(dashboard.routes());
+    /* 
+    
+    
+    
     app.use(upload.routes()); */
 }; 

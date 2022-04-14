@@ -2,7 +2,7 @@
  import { building } from '@/service';
  import { message } from 'ant-design-vue';
  import { result, clone } from '@/helpers/utils';
-
+ import store from '@/store';
 
 
  const defaultFormData = {
@@ -20,11 +20,10 @@
     },
    setup(props , context  ) {
     const addForm = reactive(clone(defaultFormData));
-     
-
-//     if (store.state.goodClassify.length) {
-//       addForm.classify = store.state.goodClassify[0]._id;
-//     }
+    
+    if (store.state.buildingClassify.length) {
+      addForm.classify = store.state.buildingClassify[0]._id; 
+    }
 
     const close = () => {
       context.emit('update:show', false);
@@ -52,7 +51,7 @@
        submit,
        props,
        close,
-//       store: store.state,
+       store: store.state,
      };
    },
  });

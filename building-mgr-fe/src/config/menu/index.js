@@ -1,11 +1,11 @@
 /* import _ from '../common'; */
 
 export default [
-  /* {
+  {
     title: '总览',
     url: '/dashboard',
     onlyAdmin: true,
-  }, */
+  },
   {
     title: '书籍管理',
     url: '/buildings',
@@ -26,11 +26,11 @@ export default [
     title: '杂项',
     onlyAdmin: false,
     children: [
-      /* {
-        title: `${_.KEYWORD}分类管理`,
-        url: '/good-classify',
+      {
+        title: '书籍分类管理',
+        url: '/building-classify',
         onlyAdmin: true,
-      }, */
+      }, 
       {
         title: '重制密码列表',
         url: '/reset/password',
@@ -43,9 +43,9 @@ export default [
       },
     ],
   },
-  /* {
+  {
     title: '个人设置',
     url: '/profile',
     onlyAdmin: false,
-  },  */
+  },  
 ];

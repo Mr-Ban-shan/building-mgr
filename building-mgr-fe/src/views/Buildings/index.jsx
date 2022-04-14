@@ -1,10 +1,13 @@
 import { defineComponent, ref, onMounted } from 'vue';
 import AddOne from './AddOne/index.vue';
-import { building/* , buildingClassify */ } from '@/service';
+import { building , buildingClassify  } from '@/service';
 import { result , formatTimestamp  } from '@/helpers/utils';
 import { message, Modal, Input } from 'ant-design-vue';
 import { useRouter } from 'vue-router';
 import Update from './Update/index.vue';
+/* import _ from '@/config/common'; */
+import { getClassifyTitleById } from '@/helpers/building-classify';
+
 
 export default defineComponent({
   components:{
@@ -15,6 +18,7 @@ export default defineComponent({
     simple: Boolean,
   },
   setup(props){
+  const router = useRouter();
 
     const columns = [
       {
@@ -44,15 +48,17 @@ export default defineComponent({
        },
        {
          title: '分类',
-         dataIndex: 'classify',
+         slots: {
+          customRender: 'classify',
+        },
        },
-          {
+          /* {
         title: '操作',
         slots: { customRender: 'actions' }
-      }  
+      }   */
       ];
 
-      /* if (!props.simple) {
+      if (!props.simple) {
         columns.push({
           title: '操作',
           dataIndex: 'actions',
@@ -60,7 +66,7 @@ export default defineComponent({
             customRender: 'actions',
           },
         });
-      } */
+      } 
 
       const show = ref(false);
       const showUpdateModal = ref(false);
@@ -70,7 +76,8 @@ export default defineComponent({
       const curPage = ref(1);
       const isSearch = ref(false);
       const curEditBuilding=ref({});
-      const router = useRouter();
+
+      
 
       // 获取商品列表
     const getList = async () => {
@@ -218,6 +225,8 @@ export default defineComponent({
         updateCurBuilding,
         getList,
         toDetail,
+        getClassifyTitleById,
+        simple: props.simple,
       };
   },
 });

@@ -1,10 +1,10 @@
 <template>
   <div>
     <a-card
-      :title="wdadwad"
+      :title="simple ? '最近添加的图书' : ''"
     >
-      <div >
-        <h2>建材列表</h2>
+      <div v-if="!simple">
+        <h2 >建材列表</h2>
 
         <a-divider />
 
@@ -23,6 +23,7 @@
           <div>
             <a-button
               @click="show = true"
+              
             >
               添加一条
             </a-button>
@@ -44,8 +45,9 @@
       :data-source="list"
       :pagination="false"
       bordered
+      :scroll="{ x: 'max-content' }"
       >
-
+<!--  -->
          <template #publishDate="data">
           {{ formatTimestamp(data.record.publishDate) }}
         </template>
@@ -56,7 +58,7 @@
           <a href="javascript:;" @click="updateCount('OUT_COUNT', data.record)">出库</a>
         </template>
 
-        <template #actions="record">
+        <template #actions="record" v-if="!simple">
            <a href="javascript:;" @click="toDetail(record)">详情</a>
           &nbsp; 
            <a href="javascript:;" @click="update(record)">编辑</a>
@@ -64,13 +66,14 @@
           <a href="javascript:;" @click="remove(record)">删除</a>
         </template>
 
-         <!-- <template #classify="{ record }">
+         <template #classify="{ record }">
           {{ getClassifyTitleById(record.classify) }}
-        </template>  -->
+        </template> 
       </a-table>
 
       <flex-end  >
         <a-pagination
+        v-if="!simple"
         style="margin-top:24px; float:right"
           v-model:current="curPage"
           :total="total"
@@ -83,7 +86,9 @@
 
     <add-one
       v-model:show="show"
+      :classifyList="buildingClassifyList"
       @getList="getList"
+      
     />
        
     <update

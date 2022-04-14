@@ -2,7 +2,7 @@
   <div>
    <a-spin :spinning="loading">
     <a-card
-      :title="simple ? $$.PAGE_META.DASHBOARD.RECENT.RIGHT_TITLE : ''"
+      :title="simple ? '最近的操作日志' : ''"
     >
       <div v-if="!simple">
         <h2>操作日志</h2>
