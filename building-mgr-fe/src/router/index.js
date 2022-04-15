@@ -69,8 +69,7 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-
-  /* let res = {};
+  let res = {};
 
   try {
     res = await user.info();
@@ -92,15 +91,13 @@ router.beforeEach(async (to, from, next) => {
     next('/auth');
 
     return;
-  } */
+  }
 
   if (!store.state.characterInfo.length) {
     await store.dispatch('getCharacterInfo');
   }
 
-  /* store.dispatch('getUserInfo'); */
-
-  const reqArr = []; 
+  const reqArr = [];
 
   if (!store.state.userInfo.account) {
     reqArr.push(store.dispatch('getUserInfo'));
@@ -109,18 +106,15 @@ router.beforeEach(async (to, from, next) => {
   if (!store.state.buildingClassify.length) {
     reqArr.push(store.dispatch('getBuildingClassify'));
   }
-  
-
-  
 
   await Promise.all(reqArr);
 
-  /* if (to.path === '/auth') {
-    next('/goods');
+  if (to.path === '/auth') {
+    next('/buildings');
     return;
-  } */
-   
-  next(); 
+  }
+
+  next();
 });
 
 export default router;

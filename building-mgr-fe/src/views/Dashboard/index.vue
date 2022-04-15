@@ -4,8 +4,8 @@
       <a-card>
         <div class="list">
           <div class="item">
-            <div class="count">共{{ baseInfo.total.building }}本</div>
-            <div class="title">书籍</div>
+            <div class="count">共{{ baseInfo.total.building }}种</div>
+            <div class="title">建材</div>
           </div>
           <div class="item">
             <div class="count">共{{ baseInfo.total.user }}位</div>

@@ -4,14 +4,8 @@ import { result, formatTimestamp } from '@/helpers/utils';
 import { building , inventoryLog  } from '@/service';
 import { message } from 'ant-design-vue';
 import Update from '@/views/Buildings/Update/index.vue';
-
+import { getClassifyTitleById } from '@/helpers/building-classify';
 import { CheckOutlined } from '@ant-design/icons-vue';
-/* 
-
-import { getClassifyTitleById } from '@/helpers/good-classify';
-
-
- */
 
  const columns = [
   {
@@ -43,7 +37,7 @@ export default defineComponent({
     const log = ref([]);
     const curLogType = ref('IN_COUNT');
 
-    // 获取商品详细信息
+    // 获取建材详细信息
     const getDetail = async () => {
       const res = await building.detail(id);
 
@@ -118,17 +112,8 @@ export default defineComponent({
       logFilter,
       curLogType,
       logCurPage,
-      /* 
+      getClassifyTitleById,
       
-      
-      
-      
-      
-      
-      
-      
-      
-      getClassifyTitleById, */
     }; 
   },
 });

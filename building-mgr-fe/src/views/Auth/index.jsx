@@ -106,6 +106,8 @@ const forgetPassword = () => {
           message.success(msg);
           setToken(token);
 
+          await store.dispatch('getCharacterInfo');
+
           store.commit('setUserInfo', user);
           store.commit('setUserCharacter', getCharacterInfoById(user.character));
 

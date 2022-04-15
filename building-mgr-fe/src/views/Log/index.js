@@ -4,24 +4,6 @@ import { result, formatTimestamp } from '@/helpers/utils';
 import { getLogInfoByPath } from '@/helpers/log';
 import { message } from 'ant-design-vue';
 
-
-const columns = [
-  {
-    title: '用户名',
-    dataIndex: 'user.account',
-  },
-  {
-    title: '动作',
-    dataIndex: 'action',
-  },
-  {
-    title: '记录时间',
-    slots: {
-      customRender: 'createdAt',
-    },
-  },
-];
-
 export default defineComponent({
   props: {
     simple: Boolean,
@@ -32,7 +14,22 @@ export default defineComponent({
     const list = ref([]);
     const loading = ref(true);
 
-    
+    const columns = [
+      {
+        title: '用户名',
+        dataIndex: 'user.account',
+      },
+      {
+        title: '动作',
+        dataIndex: 'action',
+      },
+      {
+        title: '记录时间',
+        slots: {
+          customRender: 'createdAt',
+        },
+      },
+    ];
 
     if (!props.simple) {
       columns.push({

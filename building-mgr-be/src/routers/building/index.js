@@ -1,8 +1,9 @@
  const Router = require('@koa/router');
  const mongoose = require('mongoose');
-// const config = require('../../project.config');
+const config = require('../../project.config');
  const { getBody } = require('../../helpers/utils');
-// const { loadExcel, getFirstSheet } = require('../../helpers/excel');
+ 
+const { loadExcel, getFirstSheet } = require('../../helpers/excel');
 // const _ = require('../../config/common');
 
 const BUILDING_CONST = {
@@ -12,7 +13,7 @@ const BUILDING_CONST = {
 
  const Building = mongoose.model('Building');
  const InventoryLog = mongoose.model('InventoryLog');
-// const GoodClassify = mongoose.model('GoodClassify');
+ const BuildingClassify = mongoose.model('BuildingClassify');
 
 
 
@@ -29,7 +30,7 @@ const findBuildingOne = async (id) => {
  });
 
  router.get('/list', async (ctx) => {
-//   // https://aa.cc.com/user?page=2&size=20&keyword=书名#fdsafds
+//   // https://aa.cc.com/user?page=2&size=20&keyword=建材名#fdsafds
    const {
      page = 1,
      keyword = '',
@@ -107,13 +108,13 @@ router.delete('/:id', async (ctx) => {
   if (!one) {
     ctx.body = {
       code: 0,
-      msg: '没有找到书籍',
+      msg: '没有找到建材',
     };
 
     return;
   }
 
-  // 找到了书
+  // 找到了建材
   if (type === BUILDING_CONST.IN) {
     // 入库操作
     num = Math.abs(num);
@@ -156,7 +157,7 @@ router.delete('/:id', async (ctx) => {
 
   const one = await findBuildingOne(id);
 
-  // 没有找到书
+  // 没有找到建材
   if (!one) {
     ctx.body = {
       msg: '没有找到',
@@ -191,10 +192,10 @@ router.get('/detail/:id', async (ctx) => {
 
   const one = await findBuildingOne(id);
 
-  // 没有找到书
+  // 没有找到建材
   if (!one) {
     ctx.body = {
-      msg: '没有找到书籍',
+      msg: '没有找到建材',
       code: 0,
     };
 
@@ -208,60 +209,62 @@ router.get('/detail/:id', async (ctx) => {
   };
 });
 
-// router.post('/addMany', async (ctx) => {
-//   const {
-//     key = '',
-//   } = ctx.request.body;
+router.post('/addMany', async (ctx) => {
+  const {
+    key = '',
+  } = ctx.request.body;
 
-//   const path = `${config.UPLOAD_DIR}/${key}`;
+  const path = `${config.UPLOAD_DIR}/${key}`;
 
-//   const excel = loadExcel(path);
+  const excel = loadExcel(path);
 
-//   const sheet = getFirstSheet(excel);
+  const sheet = getFirstSheet(excel);
 
-//   const arr = [];
-//   for (let i = 0; i < sheet.length; i++) {
-//     let record = sheet[i];
+  
 
-//     const [
-//       name,
-//       price,
-//       producedDate,
-//       expirationDate,
-//       classify,
-//       count,
-//     ] = record;
+  const arr = [];
+  for (let i = 0; i < sheet.length; i++) {
+    let record = sheet[i];
 
-//     let classifyId = classify;
+    const [
+      name,
+      price,
+      author,
+      publishDate,
+      classify,
+      count,
+    ] = record;
 
-//     const one = await GoodClassify.findOne({
-//       title: classify,
-//     });
+    let classifyId = classify;
 
-//     if (one) {
-//       classifyId = one._id;
-//     }
+    const one = await BuildingClassify.findOne({
+      title: classify,
+    });
 
-//     arr.push({
-//       name,
-//       price,
-//       producedDate,
-//       expirationDate,
-//       classify: classifyId,
-//       count,
-//     });
-//   }
+    if (one) {
+      classifyId = one._id;
+    }
 
-//   await Good.insertMany(arr);
+    arr.push({
+      name,
+      price,
+      author,
+      publishDate,
+      classify: classifyId,
+      count,
+    });
+  }
 
-//   ctx.body = {
-//     code: 1,
-//     msg: '添加成功',
-//     data: {
-//       addCount: arr.length,
-//     },
-//   };
-// });
+  await Building.insertMany(arr);
+
+  ctx.body = {
+    code: 1,
+    msg: '添加成功',
+    data: {
+      addCount: arr.length,
+    },
+  };
+});
 
  router.post('/add', async (ctx) => {
    const {

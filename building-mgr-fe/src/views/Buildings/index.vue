@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-card
-      :title="simple ? '最近添加的图书' : ''"
+      :title="simple ? '最近添加的建材' : ''"
     >
       <div v-if="!simple">
         <h2 >建材列表</h2>
@@ -29,7 +29,9 @@
             </a-button>
             &nbsp;
             <a-upload
-              
+              @change="onUploadChange"
+              action="http://localhost:3000/upload/file"
+              :headers="headers"
             >
             <!-- :headers="headers" -->
               <a-button type="primary">上传 Excel 添加</a-button>
@@ -52,6 +54,10 @@
           {{ formatTimestamp(data.record.publishDate) }}
         </template>
 
+         <template #classify="{ record }">
+          {{ getClassifyTitleById(record.classify) }}
+        </template> 
+        
         <template #count="data">
           <a href="javascript:;" @click="updateCount('IN_COUNT', data.record)">入库</a>
           {{ data.record.count }}
@@ -66,9 +72,6 @@
           <a href="javascript:;" @click="remove(record)">删除</a>
         </template>
 
-         <template #classify="{ record }">
-          {{ getClassifyTitleById(record.classify) }}
-        </template> 
       </a-table>
 
       <flex-end  >

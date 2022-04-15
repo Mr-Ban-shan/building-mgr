@@ -7,7 +7,7 @@ export default [
     onlyAdmin: true,
   },
   {
-    title: '书籍管理',
+    title: '建材管理',
     url: '/buildings',
     onlyAdmin: true,
   },
@@ -27,7 +27,7 @@ export default [
     onlyAdmin: false,
     children: [
       {
-        title: '书籍分类管理',
+        title: '建材分类管理',
         url: '/building-classify',
         onlyAdmin: true,
       }, 

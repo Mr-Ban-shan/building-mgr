@@ -1,10 +1,10 @@
 <template>
   <div>
-    <a-card :title="书籍分类管理">
+    <a-card :title="建材分类管理">
       <div>
         <a-input
           v-model:value="title"
-          :placeholder="输入书籍分类"
+          :placeholder="输入建材分类"
           style="width: 200px;"
         />
         &nbsp;

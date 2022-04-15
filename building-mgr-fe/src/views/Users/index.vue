@@ -21,10 +21,12 @@
           <a-button @click="showAddModal = true">添加用户</a-button>
           &nbsp;
           <a-upload
-             
+             @change="onUploadChange"
+             action="http://localhost:3000/upload/file"
+             :headers="headers"
           >
-          <!-- :headers="headers" -->
-            <a-button type="primary">上传 Excel 添加</a-button>
+          <!--  -->
+            <a-button type="primary" >上传 Excel 添加</a-button>
           </a-upload>
         </div>
       </space-between>

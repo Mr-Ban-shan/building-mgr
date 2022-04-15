@@ -3,8 +3,8 @@
     <div class="app-header">
 
       <div class="left">
-        <img src="https://ncstatic.clewm.net/rsrc/2020/1016/02/4757e4910cb527fc040d019a93ded74f.png?x-oss-process=image/resize,w_750/format,gif/sharpen,100/quality,Q_80/interlace,1/auto-orient,1" alt="">
-        <div class="title">图书管理系统</div>
+        <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic_source%2F0c%2Fef%2Fa0%2F0cefa0f17b83255217eddc20b15395f9.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1652577774&t=709a8b82b98a9a04e502fc142faf516c" alt="">
+        <div class="title">建材管理系统</div>
       </div>
 
       <div class="right">

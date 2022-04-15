@@ -9,11 +9,12 @@ const forgetPassword = require('./forget-password');
 const buildingClassify = require('./building-classify');
 const profile = require('./profile');
 const dashboard = require('./dashboard');
+const upload = require('./upload');
 /* 
 
 
 
-const upload = require('./upload'); */
+ */
 
 module.exports = (app) => {
     app.use(auth.routes());
@@ -27,9 +28,10 @@ module.exports = (app) => {
     app.use(buildingClassify.routes());
     app.use(profile.routes());
     app.use(dashboard.routes());
+    app.use(upload.routes()); 
     /* 
     
     
     
-    app.use(upload.routes()); */
+    */
 }; 

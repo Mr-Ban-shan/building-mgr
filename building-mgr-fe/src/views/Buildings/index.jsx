@@ -7,7 +7,7 @@ import { useRouter } from 'vue-router';
 import Update from './Update/index.vue';
 /* import _ from '@/config/common'; */
 import { getClassifyTitleById } from '@/helpers/building-classify';
-
+import { getHeaders } from '@/helpers/request';
 
 export default defineComponent({
   components:{
@@ -26,7 +26,7 @@ export default defineComponent({
         dataIndex: 'name',
       },
       {
-        title: '作者',
+        title: '公司',
         dataIndex: 'author',
       },
         {
@@ -61,7 +61,6 @@ export default defineComponent({
       if (!props.simple) {
         columns.push({
           title: '操作',
-          dataIndex: 'actions',
           slots: {
             customRender: 'actions',
           },
@@ -79,7 +78,7 @@ export default defineComponent({
 
       
 
-      // 获取商品列表
+      // 获取建材列表
     const getList = async () => {
       const res = await building.list({
         page: curPage.value,
@@ -124,7 +123,7 @@ export default defineComponent({
       getList();
     };
 
-    // 删除一本商品
+    // 删除一种建材
     const remove = async ({ text: record }) => {
       const { _id } = record;
 
@@ -180,7 +179,7 @@ export default defineComponent({
                   console.log(num);
                   one.count = one.count + num;
   
-                  message.success(`成功${word} ${Math.abs(num)} 本书`);
+                  message.success(`成功${word} ${Math.abs(num)} 种建材`);
                 }
                });
            },
@@ -200,9 +199,25 @@ export default defineComponent({
 
      
 
-    // 进入商品详情页
+    // 进入建材详情页
     const toDetail = ({ record }) => {
       router.push(`/buildings/${record._id}`);
+    };
+
+    const onUploadChange = ({ file }) => {
+      if (file.response) {
+        result(file.response)
+          .success(async (key) => {
+            const res = await building.addMany(key);
+
+            result(res)
+              .success(({ data: { addCount } }) => {
+                message.success(`成功添加 ${addCount} 种建材`);
+
+                getList();
+              });
+          });
+      }
     };
 
       return { 
@@ -227,6 +242,8 @@ export default defineComponent({
         toDetail,
         getClassifyTitleById,
         simple: props.simple,
+        onUploadChange,
+        headers: getHeaders(),
       };
   },
 });

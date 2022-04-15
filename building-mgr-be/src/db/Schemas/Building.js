@@ -3,11 +3,11 @@ const { getMeta , preSave  } = require('../helpers');
 // const _ = require('../../config/common');
 
 const BuildingSchema = new mongoose.Schema({
-  // // 书名
+  // // 建材名
    name: String,
   // // 价格
    price: Number,
-  // // 作者
+  // // 公司
    author: String,
   // // 出版日期
    publishDate: String,

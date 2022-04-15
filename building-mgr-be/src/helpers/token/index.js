@@ -31,20 +31,20 @@ const middleware = (app) => {
       path: [
         /^\/auth\/login/,
         /^\/auth\/register/,
-        /* /^\/forget-password\/add/, */
+        /^\/forget-password\/add/, 
       ],
     }));
   };
 
-  /* const res401 = (ctx) => {
+  const res401 = (ctx) => {
     ctx.status = 401;
     ctx.body = {
       code: 0,
       msg: '用户校验失败',
     };
-  }; */
+  }; 
   
-  /* const checkUser = async (ctx, next) => {
+  const checkUser = async (ctx, next) => {
     const { path } = ctx;
     if (path === '/auth/login' || path === '/auth/register' || path === '/forget-password/add') {
       await next();
@@ -74,7 +74,7 @@ const middleware = (app) => {
   
     await next();
   };
- */
+ 
   const catchTokenError = async (ctx, next) => {
     return next().catch((error) => {
       if (error.status === 401) {
@@ -95,5 +95,5 @@ module.exports = {
     getToken,
     middleware,
     catchTokenError,
-    /* checkUser, */
+    checkUser, 
 };

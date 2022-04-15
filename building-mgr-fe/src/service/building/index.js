@@ -1,56 +1,50 @@
-import axios from 'axios';
-import { getToken } from '@/helpers/token';
-
-axios.defaults.headers['Authorization'] = `Bearer ${getToken()}`;
+import {
+  del, post, get
+} from '@/helpers/request';
 
 export const add = (form) => {
-    return axios.post(
-      'http://localhost:3000/building/add', 
-      form,
+  return post(
+    '/building/add',
+    form,
   );
 };
 
 export const list = (data) => {
-    return axios.get(
-      'http://localhost:3000/building/list', 
-      {
-        params: data,
-        /* headers: {
-          Authorization: `Bearer ${getToken}`
-        }, */
-      },
+  return get(
+    '/building/list',
+    data
   );
 };
 
 export const remove = (id) => {
-  return axios.delete(
-    `http://localhost:3000/building/${id}`, 
+  return del(
+    `/building/${id}`,
   );
 };
 
-export const updateCount = (data={}) => {
-  return axios.post(
-    `http://localhost:3000/building/update/count`, 
+export const updateCount = (data = {}) => {
+  return post(
+    `/building/update/count`,
     data,
   );
 };
 
 export const update = (data = {}) => {
-  return axios.post(
-    `http://localhost:3000/building/update`,
+  return post(
+    `/building/update`,
     data,
   );
 };
 
 export const detail = (id) => {
-  return axios.get(
-    `http://localhost:3000/building/detail/${id}`,
+  return get(
+    `/building/detail/${id}`,
   );
 };
 
-
-
-
-
-
+export const addMany = (key) => {
+  return post('/building/addMany', {
+    key,
+  });
+};
 

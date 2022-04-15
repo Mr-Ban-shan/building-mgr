@@ -3,10 +3,12 @@ const mongoose = require('mongoose');
 const { v4: uuidv4 } = require('uuid');
 const config = require('../../project.config');
 const { verify, getToken } = require('../../helpers/token');
+const { loadExcel, getFirstSheet } = require('../../helpers/excel');
 
 const User = mongoose.model('User');
 const Character = mongoose.model('Character');
 
+// const { getBody } = require('../../helpers/utils');
 const router = new Router({
   prefix: '/user',
 
@@ -184,29 +186,6 @@ router.get('/info', async (ctx) => {
   }
 });
 
-/* 
-
-const { verify, getToken } = require('../../helpers/token');
-const { loadExcel, getFirstSheet } = require('../../helpers/excel');
-
-// const { getBody } = require('../../helpers/utils');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 router.post('/addMany', async (ctx) => {
   const {
     key = '',
@@ -257,5 +236,5 @@ router.post('/addMany', async (ctx) => {
 });
 
 
- */
+
 module.exports = router;

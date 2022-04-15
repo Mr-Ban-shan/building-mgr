@@ -2,7 +2,7 @@
   <div class="auth">
     <div class="bg"></div>
     <div class="title-info">
-      <img src="https://ncstatic.clewm.net/rsrc/2020/1016/02/4757e4910cb527fc040d019a93ded74f.png?x-oss-process=image/resize,w_750/format,gif/sharpen,100/quality,Q_80/interlace,1/auto-orient,1" alt="">
+      <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201605%2F23%2F20160523123308_VNc4F.thumb.1000_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1652577872&t=201eb1e4afe9fa05fc7d70de0f64061a" alt="">
       <h2 class="title"> 后台</h2>
     </div>
 

@@ -6,7 +6,7 @@ import AddOne from './AddOne/index.vue';
 import { EditOutlined } from '@ant-design/icons-vue';
 import { getCharacterInfoById } from '@/helpers/character';
 import store from '@/store';
-
+import { getHeaders } from '@/helpers/request';
 
 
 const columns = [
@@ -122,6 +122,22 @@ export default defineComponent({
         });
     }; 
 
+    const onUploadChange = ({ file }) => {
+      if (file.response) {
+        result(file.response)
+          .success(async (key) => {
+            const res = await user.addMany(key);
+
+            result(res)
+              .success(({ data: { addCount } }) => {
+                message.success(`成功添加 ${addCount} 位用户`);
+
+                getUser();
+              });
+          });
+      }
+    };
+
     return {
       list,
       total,
@@ -143,6 +159,8 @@ export default defineComponent({
       characterInfo: store.state.characterInfo,
       onEdit,
       updateCharacter,
+      onUploadChange,
+      headers: getHeaders(),
       /* 
       
       
@@ -157,7 +175,7 @@ export default defineComponent({
       
       
       onUploadChange,
-      headers: getHeaders(), */
+       */
     };
 
   },
@@ -168,7 +186,7 @@ export default defineComponent({
 
 
 
-import { getHeaders } from '@/helpers/request';
+
 
 
 

@@ -35,7 +35,7 @@ router.post('/add', async (ctx) => {
   if (one) {
     ctx.body = {
       code: 0,
-      msg: '书籍分类已经存在',
+      msg: '建材分类已经存在',
     };
     return;
   }
