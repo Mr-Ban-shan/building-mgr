@@ -31,7 +31,7 @@ export default defineComponent({
     };
 
     const add = async () => {
-      const res = await buildingClassify.add(title.value);
+      const res = await buildingClassify.add(title.value/* +"建材" */);
 
       result(res)
         .success(({ msg }) => {

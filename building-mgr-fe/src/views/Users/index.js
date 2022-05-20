@@ -7,7 +7,7 @@ import { EditOutlined } from '@ant-design/icons-vue';
 import { getCharacterInfoById } from '@/helpers/character';
 import store from '@/store';
 import { getHeaders } from '@/helpers/request';
-
+import Update from './Update/index.vue';
 
 const columns = [
   {
@@ -27,6 +27,12 @@ const columns = [
     },
   },
   {
+    title: '联系方式',
+    slots: {
+      customRender: 'phone',
+    },
+  },
+  {
     title: '操作',
     slots: {
       customRender: 'actions',
@@ -38,6 +44,7 @@ export default defineComponent({
   components: {
     AddOne,
     EditOutlined, 
+    Update,
   },
 
   setup() {
@@ -45,9 +52,11 @@ export default defineComponent({
     const total = ref(0);
     const curPage = ref(1);
     const showAddModal = ref(false);
+    const showUpdateModal = ref(false);
     const keyword = ref('');
     const isSearch = ref(false);
     const showEditCharacterModal = ref(false);
+    const curEditUser = ref({});
 
     const getUser = async () => {
       const res = await user.list(curPage.value, 10 , keyword.value );
@@ -138,6 +147,26 @@ export default defineComponent({
       }
     };
 
+    /* // 显示更新弹框
+    const update = (record ) => {
+      showUpdateModal.value = true;
+      curEditUser.value = record;
+      console.log('@', curEditUser)
+    }; */
+
+    // 显示更新弹框
+    const update = ( record ) => {
+      showUpdateModal.value = true;
+      curEditUser.value = record;
+    };
+
+    // 更新列表的某一行数据
+    const updateCurUser = (newData) => {
+      Object.assign(curEditUser.value, newData);
+    };
+
+    
+
     return {
       list,
       total,
@@ -146,6 +175,7 @@ export default defineComponent({
       formatTimestamp,
       remove,
       showAddModal,
+      showUpdateModal,
       getUser,
       setPage,
       resetPassword,
@@ -161,6 +191,9 @@ export default defineComponent({
       updateCharacter,
       onUploadChange,
       headers: getHeaders(),
+      update,
+      curEditUser,
+      updateCurUser,
       /* 
       
       

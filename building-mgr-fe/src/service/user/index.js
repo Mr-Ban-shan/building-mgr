@@ -17,11 +17,12 @@ export const remove = (id) => {
   return del(`/user/${id}`);
 };
 
-export const add = (account, password, character) => {
+export const add = (account, password, character,phone) => {
   return post('/user/add', {
     account,
     password,
     character,
+    phone,
   });
 };
 
@@ -40,6 +41,12 @@ export const editCharacter = (characterId, userId) => {
 
 export const info = () => {
   return get('/user/info');
+};
+
+export const update = (data = {}) => {
+  return post('/user/update', {
+    data,
+  });
 };
 
 export const addMany = (key) => {

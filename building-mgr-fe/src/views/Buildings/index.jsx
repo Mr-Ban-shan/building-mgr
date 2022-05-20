@@ -40,7 +40,7 @@ export default defineComponent({
         },
       },
        {
-         title: '出版日期',
+         title: '生产日期',
          dataIndex: 'publishDate',
          slots: {
           customRender: 'publishDate',

@@ -9,6 +9,8 @@ const User = mongoose.model('User');
 const Character = mongoose.model('Character');
 
 // const { getBody } = require('../../helpers/utils');
+
+
 const router = new Router({
   prefix: '/user',
 
@@ -73,6 +75,7 @@ router.post('/add', async (ctx) => {
     account,
     password,
     character,
+    phone,
   } = ctx.request.body;
 
   const char = await Character.findOne({
@@ -88,10 +91,20 @@ router.post('/add', async (ctx) => {
     return;
   }
 
+  const regExp1 = /^(86)?((13\d{9})|(15[0,1,2,3,5,6,7,8,9]\d{8})|(18[0,5,6,7,8,9]\d{8}))$/;//
+			if(!regExp1.test(phone)){
+				ctx.body = {
+          msg: '手机格式出错',
+          code: 0,
+        }
+        return;
+			}
+
   const user = new User({
     account,
     password: password || '123123',
     character,
+    phone,
   });
 
   const res = await user.save()
@@ -132,6 +145,55 @@ router.post('/reset/password', async (ctx) => {
       _id: res._id,
     },
     code: 1,
+  };
+});
+
+router.post('/update', async (ctx) => {
+  const {
+    data
+  } = ctx.request.body;
+
+  const {id, phone} = data;
+
+  console.log(ctx.request.body)
+
+  const findUserOne = async (id) => {
+    const one = await User.findOne({
+      _id: id,
+    }).exec();
+  
+    return one;
+  };
+
+  const one = await findUserOne(id);
+
+  const regExp = /^(86)?((13\d{9})|(15[0,1,2,3,5,6,7,8,9]\d{8})|(18[0,5,6,7,8,9]\d{8}))$/;
+			if(!regExp.test(phone)){
+				ctx.body = {
+          msg: '手机号码格式错误',
+          code: 0,
+        }
+        return;
+			}
+
+      const newQuery = {};
+
+  Object.entries(data).forEach(([key, value]) => {
+    if (value) {
+      newQuery[key] = value;
+    }
+  });
+
+  Object.assign(one, newQuery);
+
+  const res = await one.save();
+
+  ctx.body = {
+    data: {
+      phone,
+    },
+    code: 1,
+    msg: '修改成功',
   };
 });
 
@@ -209,6 +271,8 @@ router.post('/addMany', async (ctx) => {
 
     const [account, password = config.DEFAULT_PASSWORD] = record;
 
+    
+
     const one = await User.findOne({
       account,
     })
@@ -221,6 +285,7 @@ router.post('/addMany', async (ctx) => {
       account,
       password,
       character: member._id,
+      phone,
     });
   }
 

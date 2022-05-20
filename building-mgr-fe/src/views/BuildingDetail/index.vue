@@ -2,7 +2,7 @@
   <div>
     <a-card>
       <space-between>
-        <h2>建材的名字</h2>
+        <h2>{{ d.name }}</h2>
         <div >
           <a-button size="small" type="primary" @click="showUpdateModal = true">编辑</a-button>
           &nbsp;

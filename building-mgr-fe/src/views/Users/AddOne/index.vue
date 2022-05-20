@@ -15,6 +15,10 @@
           <a-input v-model:value="addForm.password" />
         </a-form-item>
 
+        <a-form-item label="联系方式">
+          <a-input  v-model:value="addForm.phone" />
+        </a-form-item>
+
         <a-form-item label="角色">
           <a-select
             v-model:value="addForm.character"

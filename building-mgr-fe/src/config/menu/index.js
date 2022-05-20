@@ -4,12 +4,12 @@ export default [
   {
     title: '总览',
     url: '/dashboard',
-    onlyAdmin: true,
+    onlyAdmin: false,
   },
   {
     title: '建材管理',
     url: '/buildings',
-    onlyAdmin: true,
+    onlyAdmin: false,
   },
   {
     title: '用户管理',
@@ -23,14 +23,15 @@ export default [
   
   }, 
   {
+    title: '建材分类管理',
+    url: '/building-classify',
+    onlyAdmin: true,
+  },
+  {
     title: '杂项',
-    onlyAdmin: false,
+    onlyAdmin: true,
     children: [
-      {
-        title: '建材分类管理',
-        url: '/building-classify',
-        onlyAdmin: true,
-      }, 
+       
       {
         title: '重制密码列表',
         url: '/reset/password',
@@ -46,6 +47,6 @@ export default [
   {
     title: '个人设置',
     url: '/profile',
-    onlyAdmin: false,
+    onlyAdmin: true,
   },  
 ];

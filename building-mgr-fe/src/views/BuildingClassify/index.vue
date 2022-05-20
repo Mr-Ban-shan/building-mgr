@@ -4,7 +4,7 @@
       <div>
         <a-input
           v-model:value="title"
-          :placeholder="输入建材分类"
+          placeholder="请输入 xx建材 "
           style="width: 200px;"
         />
         &nbsp;

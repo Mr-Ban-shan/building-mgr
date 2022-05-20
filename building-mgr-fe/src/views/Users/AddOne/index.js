@@ -7,7 +7,8 @@ import store from '@/store';
 const defaultFormData = {
   account: '',
   password: '',
-  character: '', 
+  character: '',
+  phone: '', 
 };
 
 export default defineComponent({
@@ -28,7 +29,7 @@ export default defineComponent({
     const submit = async () => {
       const form = clone(addForm);
 
-      const res = await user.add(form.account, form.password,form.character);
+      const res = await user.add(form.account, form.password,form.character,form.phone);
 
       result(res)
         .success((d, { data }) => {

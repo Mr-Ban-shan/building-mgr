@@ -49,11 +49,19 @@
             {{ getCharacterInfoById(record.character).title }}
           </template> 
 
+          <template #phone="{ record }">
+            {{ (record.phone) }}
+          </template> 
+
            <template #actions="{ record }">
             <a href="javascript:;" @click="resetPassword(record)">重置密码</a>
             &nbsp;
+            <a href="javascript:;" @click="update(record)">编辑</a>
+            &nbsp;
             <a href="javascript:;" @click="remove(record)">删除</a>
           </template> 
+
+          
         </a-table>
       </div>
 
@@ -70,7 +78,7 @@
      <add-one
       v-model:show="showAddModal"
       @getList="getUser"
-    /> -
+    /> 
 
     <a-modal
       v-model:visible="showEditCharacterModal"
@@ -89,7 +97,18 @@
           {{ item.title }}
         </a-select-option>
       </a-select>
+
+      
     </a-modal>
+
+    
+<update
+      v-model:show="showUpdateModal"
+      :user="curEditUser"
+      @update="updateCurUser"
+    />
+    
+    
   </div>
 </template>
 

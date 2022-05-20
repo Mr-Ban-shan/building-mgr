@@ -8,7 +8,7 @@
       </div>
 
       <div class="right">
-        <div class="hello-msg">你好，</div>
+        <div class="hello-msg">你好，{{ store.userInfo.account }}</div>
         <div class="logout" @click="logout">退出</div>
       </div>
 
